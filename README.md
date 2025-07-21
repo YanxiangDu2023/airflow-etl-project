@@ -1,5 +1,3 @@
-：
-
 ---
 
 ````markdown
@@ -22,16 +20,16 @@ You can run the entire project either **locally** or in **GitHub Codespaces** us
 
 ## 🧰 Tech Stack
 
-| Tool        | Purpose                            |
-|-------------|-------------------------------------|
-| Apache Airflow | Workflow orchestration (DAGs)     |
-| Apache Spark | Data processing & transformation   |
-| DuckDB      | Analytical database / data warehouse |
-| PostgreSQL  | Metadata and staging storage         |
-| MinIO       | S3-compatible object storage         |
-| Docker      | Containerized execution              |
-| GitHub Actions | CI/CD and automated testing       |
-| Quarto + Plotly | Dashboard visualization          |
+| Tool            | Purpose                              |
+|-----------------|---------------------------------------|
+| Apache Airflow  | Workflow orchestration (DAGs)         |
+| Apache Spark    | Data processing & transformation      |
+| DuckDB          | Analytical database / data warehouse  |
+| PostgreSQL      | Metadata and staging storage          |
+| MinIO           | S3-compatible object storage          |
+| Docker          | Containerized execution               |
+| GitHub Actions  | CI/CD and automated testing           |
+| Quarto + Plotly | Dashboard visualization               |
 
 ---
 
@@ -55,12 +53,13 @@ Final rendered dashboard is located at:
 
 ### ▶️ Run on GitHub Codespaces
 
-1. Fork this repository
-2. Click `Code` → `Codespaces` → `Create codespace on master/main`
-3. After container is ready:
-   ```bash
-   make up
-   sleep 30
+1. Fork this repository  
+2. Click `Code` → `Codespaces` → `Create codespace on main`  
+3. After container is ready, run the following:
+
+```bash
+make up
+sleep 30
 ````
 
 4. Access Airflow UI via the `Ports` tab → port `8080`
@@ -77,7 +76,7 @@ Final rendered dashboard is located at:
 * Git
 * Docker with ≥ 4GB memory
 * Docker Compose v1.27.0+
-* Python (optional for dashboard script)
+* Python (optional, for dashboard script)
 
 #### Steps
 
@@ -90,6 +89,7 @@ make ci  # run quality checks and tests
 ```
 
 Visit Airflow UI at [http://localhost:8080](http://localhost:8080)
+Login: `airflow` / `airflow`
 
 ---
 
@@ -131,5 +131,4 @@ Originally created by [josephmachado](https://github.com/josephmachado/beginner_
 
 ```
 
----
-```
+
