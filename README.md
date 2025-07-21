@@ -1,74 +1,135 @@
+：
 
+---
 
-* [Beginner DE Project - Batch Edition](#beginner-de-project---batch-edition)
-    * [Run Data Pipeline](#run-data-pipeline)
-        * [Run on codespaces](#run-on-codespaces)
-        * [Run locally](#run-locally)
-    * [Architecture](#architecture)
+````markdown
+# NYC Taxi Data Engineering Pipeline 🚖  
+*A beginner-friendly batch ETL project for modern data engineers*
 
-# Beginner DE Project - Batch Edition
+> 📍 This project is adapted and extended from the tutorial: [Data Engineering Project for Beginners – Batch Edition](https://www.startdataengineering.com/post/data-engineering-project-for-beginners-batch-edition/)  
+> 🛠️ Built and maintained by **Yanxiang Du**
 
-Code for blog at [Data Engineering Project for Beginners](https://www.startdataengineering.com/post/data-engineering-project-for-beginners-batch-edition/).
+---
 
-## Run Data Pipeline
+## 🚀 Project Overview
 
-Code available at **[beginner_de_project](https://github.com/josephmachado/beginner_de_project)** repository.
+This data pipeline demonstrates how to extract, transform, and load (ETL) real-world data using industry-standard open-source tools.  
+It uses Apache Airflow to orchestrate a batch pipeline for processing NYC taxi trip data and stores the results in PostgreSQL and DuckDB. It also integrates Spark for computation and MinIO as an object storage system.
 
-### Run on codespaces
+You can run the entire project either **locally** or in **GitHub Codespaces** using Docker Compose.
 
-You can run this data pipeline using GitHub codespaces. Follow the instructions below.
+---
 
-1. Create codespaces by going to the **[beginner_de_project](https://github.com/josephmachado/beginner_de_project)** repository, cloning it(or click `Use this template` button) and then clicking on `Create codespaces on main` button.
-2. Wait for codespaces to start, then in the terminal type `make up`.
-3. Wait for `make up` to complete, and then wait for 30s (for Airflow to start).
-4. After 30s go to the `ports` tab and click on the link exposing port `8080` to access Airflow UI (username and password is `airflow`).
+## 🧰 Tech Stack
 
-![Codespace](assets/images/cs1.png)
-![Codespace make up](assets/images/cs2.png)
-![Codespace Airflow UI](assets/images/cs3.png)
+| Tool        | Purpose                            |
+|-------------|-------------------------------------|
+| Apache Airflow | Workflow orchestration (DAGs)     |
+| Apache Spark | Data processing & transformation   |
+| DuckDB      | Analytical database / data warehouse |
+| PostgreSQL  | Metadata and staging storage         |
+| MinIO       | S3-compatible object storage         |
+| Docker      | Containerized execution              |
+| GitHub Actions | CI/CD and automated testing       |
+| Quarto + Plotly | Dashboard visualization          |
 
-**Note** Make sure to switch off codespaces instance, you only have limited free usage; see docs [here](https://github.com/features/codespaces#pricing).
+---
 
-### Run locally
+## 🏗️ Architecture
 
-To run locally, you need:
+![Architecture](assets/images/arch.png)
 
-1. [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-2. [Github account](https://github.com/)
-3. [Docker](https://docs.docker.com/engine/install/) with at least 4GB of RAM and [Docker Compose](https://docs.docker.com/compose/install/) v1.27.0 or later
+This pipeline includes:
 
-Clone the repo and run the following commands to start the data pipeline:
+- Batch extraction and transformation of taxi trip data
+- Spark job to process and classify user activity
+- Visualization with Quarto dashboard
+- CI/CD integration with `make` commands and GitHub Actions
+
+Final rendered dashboard is located at:  
+📄 `./dags/scripts/dashboard/dashboard.html`
+
+---
+
+## ⚙️ Run the Project
+
+### ▶️ Run on GitHub Codespaces
+
+1. Fork this repository
+2. Click `Code` → `Codespaces` → `Create codespace on master/main`
+3. After container is ready:
+   ```bash
+   make up
+   sleep 30
+````
+
+4. Access Airflow UI via the `Ports` tab → port `8080`
+
+   * Username: `airflow`
+   * Password: `airflow`
+
+---
+
+### 🖥️ Run Locally
+
+#### Requirements
+
+* Git
+* Docker with ≥ 4GB memory
+* Docker Compose v1.27.0+
+* Python (optional for dashboard script)
+
+#### Steps
 
 ```bash
-git clone https://github.com/josephmachado/beginner_de_project.git
-cd beginner_de_project 
+git clone https://github.com/YOUR_USERNAME/data-engineering-pipeline.git
+cd data-engineering-pipeline
 make up
-sleep 30 # wait for Airflow to start
-make ci # run checks and tests
+sleep 30
+make ci  # run quality checks and tests
 ```
 
-Go to [http:localhost:8080](http:localhost:8080) to see the Airflow UI. Username and password are both `airflow`.
+Visit Airflow UI at [http://localhost:8080](http://localhost:8080)
 
-## Architecture
+---
 
-This data engineering project, includes the following:
+## 📝 DAG Example
 
-1. **`Airflow`**: To schedule and orchestrate DAGs.
-2. **`Postgres`**: To store Airflow's details (which you can see via Airflow UI) and also has a schema to represent upstream databases.
-3. **`DuckDB`**: To act as our warehouse
-4. **`Quarto with Plotly`**: To convert code in `markdown` format to html files that can be embedded in your app or servered as is.
-5. **`Apache Spark`**: To process our data, specifically to run a classification algorithm.
-6. **`minio`**: To provide an S3 compatible open source storage system.
-
-For simplicity services 1-5 of the above are installed and run in one container defined [here](./containers/airflow/Dockerfile).
-
-![Data pipeline design](assets/images/arch.png)
-
-The `user_analytics_dag` DAG in the [Airflow UI](http://localhost:8080) will look like the below image:
+Example DAG: `user_analytics_dag`
+This pipeline extracts and transforms data, loads to warehouse, and generates insights via dashboard.
 
 ![DAG](assets/images/dag.png)
 
-On completion, you can see the dashboard html rendered at[./dags/scripts/dashboard/dashboard.html](./dags/scripts/dashboard/dashboard.html).
+---
 
-Read **[this post](https://www.startdataengineering.com/post/data-engineering-projects-with-free-template/)**, for information on setting up CI/CD, IAC(terraform), "make" commands and automated testing.
+## 📊 Output Dashboard
 
+After pipeline completes, you can open the result at:
+
+```
+./dags/scripts/dashboard/dashboard.html
+```
+
+It includes user engagement summaries and classification result.
+
+---
+
+## 🧠 Lessons & Highlights
+
+* Designed and orchestrated an end-to-end batch ETL pipeline using Airflow DAGs
+* Applied Spark for scalable transformation
+* Integrated Quarto for automated HTML dashboard rendering
+* Used MinIO to emulate cloud storage locally
+* Adopted CI/CD principles using `make`, GitHub Actions, and containerization
+
+---
+
+## 📌 Credits
+
+This project is based on the excellent tutorial by [Start Data Engineering](https://www.startdataengineering.com/).
+Originally created by [josephmachado](https://github.com/josephmachado/beginner_de_project) and adapted by **Yanxiang Du** for personal learning and portfolio.
+
+```
+
+---
+```
