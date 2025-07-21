@@ -1,7 +1,5 @@
----
 
-````markdown
-# NYC Taxi Data Engineering Pipeline 🚖  
+## NYC Taxi Data Engineering Pipeline 🚖  
 *A beginner-friendly batch ETL project for modern data engineers*
 
 > 📍 This project is adapted and extended from the tutorial: [Data Engineering Project for Beginners – Batch Edition](https://www.startdataengineering.com/post/data-engineering-project-for-beginners-batch-edition/)  
